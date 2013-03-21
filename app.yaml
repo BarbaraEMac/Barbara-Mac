@@ -1,0 +1,27 @@
+application: barbara-mac
+version: 1
+runtime: python27
+api_version: 1
+
+handlers:
+
+- url: /css
+  static_dir: static/css
+
+- url: /js
+  static_dir: static/js
+
+- url: /imgs
+  static_dir: static/images
+  
+- url: /font
+  static_dir: static/font
+
+- url: /icons
+  static_dir: static/icons
+
+- url: /pages
+  static_dir: static/pages
+
+- url: .*
+  script: main.py
