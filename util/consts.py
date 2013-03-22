@@ -18,4 +18,4 @@ URL                 = urlunsplit((PROTOCOL, DOMAIN, '', '', ''))
 SECURE_URL          = urlunsplit((SECURE_PROTOCOL, DOMAIN, '', '', '')) 
 KEYS                = os.environ['HTTP_HOST']
 
-
+ADMIN_EMAILS = ['z4beth@gmail.com', 'barbaraemac@gmail.com']

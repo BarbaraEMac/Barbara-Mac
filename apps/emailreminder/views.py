@@ -1,13 +1,16 @@
 #!/usr/bin/python
 
 import logging
-
 import webapp2
 
-from util.urihandler import URIHandler
+from util.urihandler import admin_required, login_required, URIHandler
+
 
 class ShowEmailIndex(URIHandler):
-    def get(self):
-        template_values = { }
+
+    @login_required
+    @admin_required
+    def get(self, user):
+        template_values = { 'nickname' : user.nickname() }
 
         self.response.out.write(self.render_page('emailreminder.html', template_values))
