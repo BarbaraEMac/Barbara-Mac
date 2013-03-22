@@ -18,7 +18,6 @@ jinja_environment = jinja2.Environment(
 def login_required( fn ):
     def check( self ):
         user = self.get_user( )
-        logging.info("USER: +" + str(fn))
         if user:
             fn( self, user )
         else:
@@ -74,7 +73,7 @@ class URIHandler( webapp2.RequestHandler ):
         # Get path to template file within apps dir
         path = os.path.join('templates/', template_file_name)
         path = os.path.join(self.get_app_path() , path)
-        logging.info("Rendering %s" % path )
+        #logging.info("Rendering %s" % path )
 
         return jinja_environment.get_template(path).render(final_values) 
 

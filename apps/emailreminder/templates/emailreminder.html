@@ -1,13 +1,15 @@
 <html>
   <body>
     
+    <p>Welcome {{ nickname }}</p>
     
-    <form action="/sign" method="post">
-      <div><textarea name="content" rows="3" cols="60"></textarea></div>
-      <div><input type="submit" value="Sign Guestbook"></div>
+    <form action="/email/create" method="post">
+        <p>Subject: <input type="text" name="subject" /></p>
+        <p>Message: <textarea name="body" rows="3" cols="60"></textarea></p>
+        <p>Send Date: <input type="text" name="date_str" /></p>
+        <p><input type="submit" value="Submit"></p>
     </form>
 
-    {{ nickname }}
 
   </body>
 </html>
