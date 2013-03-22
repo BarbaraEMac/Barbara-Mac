@@ -1,0 +1,4 @@
+cron:
+- description: Check tasks to see if you should spwan an email
+  url: /reminder/cron/checkAndSend
+  schedule: every day 09:00

@@ -1,27 +1,14 @@
-application: barbara-mac
+application: social-plusplus
+
 version: 1
 runtime: python27
 api_version: 1
+default_expiration: "1d" # expiration time for static content
 
-handlers:
+builtins:
+- deferred: on
+- appstats: on
 
-- url: /css
-  static_dir: static/css
+includes:
+- handlers.yaml
 
-- url: /js
-  static_dir: static/js
-
-- url: /imgs
-  static_dir: static/images
-  
-- url: /font
-  static_dir: static/font
-
-- url: /icons
-  static_dir: static/icons
-
-- url: /pages
-  static_dir: static/pages
-
-- url: .*
-  script: main.py
