@@ -3,15 +3,12 @@
 import logging, sys, webapp2
 
 from google.appengine.api import memcache
-from google.appengine.dist import use_library
 
 # the apps we are using
 INSTALLED_APPS = [
     'emailreminder',
     'homepage',
 ]
-
-use_library('django', '0.96')
 
 # our intelligent uri router
 

@@ -31,7 +31,6 @@ class DoCreateEmailReminder(URIHandler):
 
         # Convert time
         c = pdt.Constants()
-
         c.BirthdayEpoch = 80    
         p = pdt.Calendar(c)
         val, result = p.parse( date )

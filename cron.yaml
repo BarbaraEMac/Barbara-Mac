@@ -1,2 +1,5 @@
 cron:
-
+ - description: Send email reminders
+   url: /email/cron/checkAndSend
+   schedule: every day 09:10
+   timezone: America/Toronto

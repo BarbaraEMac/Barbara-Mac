@@ -8,4 +8,5 @@ urlpatterns = [
     (r'/email/create',            DoCreateEmailReminder),
     
     (r'/email/cron/checkAndSend', CronCheckAndSend),
+    (r'/email/queue/sendEmail',   QueueSendEmail),
 ]

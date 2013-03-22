@@ -1,58 +1,21 @@
 #!/usr/bin/env python
 
 import logging, webapp2
+from datetime import datetime
 
+from apps.emailreminder.models import EmailReminder
 from google.appengine.api import taskqueue
 
 class CronCheckAndSend( webapp2.RequestHandler ):
     def get(self):
-        return
-"""
-class QueueWeeklyAnalytics( webapp.RequestHandler ):
-    def post(self):
-        return self.get( )
-
-    def get(self):
-        store = ShopifyStore.get_by_uuid( self.request.get('uuid') )
+        reminders = EmailReminder.all().filter( 'sent =', False ).filter( 'send_date <=', datetime.today() )
         
-        logging.info("Starting weekly")
-        if store.pinterest_enabled:
-            # Grab total # clicks
-            pinterest_total_clicks = 0
-
-            # Grab top urls and counts
-            pinterest_urls, pinterest_counts = Analytics_ThisWeek.get_weekly_count( store, 'pinterest' )
-
-            # Store this week's data
-            Analytics_PastWeek.create( store, 'pinterest', pinterest_total_clicks, pinterest_urls[:3])
+        for er in reminders:
+            taskqueue.add( url    = '/email/queue/sendEmail',
+                           params = {'key' : er.key()} )
         
-        if store.pinterest_enabled:
-            # Grab total # clicks
-            pinterest_total_clicks = 0
+class QueueSendEmail( webapp2.RequestHandler ):
+    def post( self ):
+        er = EmailReminder.get( self.request.get('key') )
 
-            # Grab top urls and counts
-            pinterest_urls, pinterest_counts = Analytics_ThisWeek.get_weekly_count( store, 'pinterest' )
-
-            # Store this week's data
-            Analytics_PastWeek.create( store, 'pinterest', pinterest_total_clicks, pinterest_urls[:3])
-
-        # Send out email
-        Email.weeklyAnalytics( store.email, 
-                               store.full_name, 
-                               pinterest_total_clicks,
-                               pinterest_urls,
-                               pinterest_counts )
-
-class CronWeeklyAnalytics( webapp.RequestHandler ):
-    def post(self):
-        return self.get( )
-
-    def get(self):
-        stores = ShopifyStore.all()
-        for s in stores:
-            taskqueue.add( queue_name = 'analytics', 
-                           url        = '/analytics/queue/weekly',
-                           params     = {'uuid' : s.uuid} )
-
-        
-"""
+        er.send()
